@@ -23,7 +23,7 @@ source:
     target_directory: vendor/ghostty/src/terminal/kitty
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -32,7 +32,7 @@ requirements:
     - ${{ compiler('rust') }}
     - cargo-auditable
     - cargo-bundle-licenses
-    - pkg-config
+    - pkgconf
     # bindgen for the libghostty-vt bindings
     - clang
     - libclang
