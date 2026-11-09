@@ -37,7 +37,9 @@ requirements:
     - clang
     - libclang
   host:
-    - libghostty-vt
+    # herdr's vendored ghostty (and src/vt.rs) predate the libghostty-vt 1.0 C API;
+    # 0.1.0.dev is the VT library built from Ghostty ${{ ghostty_version }}
+    - libghostty-vt <1.0
     - zstd
     - if: linux
       then:
