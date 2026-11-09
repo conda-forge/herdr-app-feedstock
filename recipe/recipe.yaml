@@ -1,5 +1,5 @@
 context:
-  version: "0.1.13"
+  version: "0.1.14"
   ghostty_version: "1.4.0"
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   - url: https://github.com/herdrdev/herdr-app/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 81636c10326e4df15f0367556714d64f7f9cb990e8bf8c4bbb91ba61d61900f6
+    sha256: b47322013cf38bb07e3c37ca1767c4db2f33cf1aab276d0323a77a4425d572af
     patches:
       # link conda-forge's libghostty-vt instead of building vendor/ghostty with zig
       - patches/0001-ghostty-sys-link-a-system-libghostty-vt.patch
@@ -23,7 +23,7 @@ source:
     target_directory: vendor/ghostty/src/terminal/kitty
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -37,7 +37,9 @@ requirements:
     - clang
     - libclang
   host:
-    - libghostty-vt
+    # herdr's vendored ghostty (and src/vt.rs) predate the libghostty-vt 1.0 C API;
+    # 0.1.0.dev is the VT library built from Ghostty ${{ ghostty_version }}
+    - libghostty-vt <1.0
     - zstd
     - if: linux
       then:
