@@ -1,0 +1,39 @@
+From e6abc963c4c892c68edc9d855e94abd8745c250e Mon Sep 17 00:00:00 2001
+From: ClaudiusHaag <62202036+claudiushaag@users.noreply.github.com>
+Date: Mon, 23 Nov 2026 12:13:25 +0100
+Subject: [PATCH] settings: say a conda package manager installed it, not a
+ build
+
+This feedstock only produces conda-forge packages. Such builds have no
+self-updates by design: the package manager owns the files and updates
+them. The Updates tab called them "a build from source"; this patch
+only clarifies the correct mechanism for the user, in both rows.
+---
+ defaults/frame/settings/main.js | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/defaults/frame/settings/main.js b/defaults/frame/settings/main.js
+index 083fdfd..e4d764e 100644
+--- a/defaults/frame/settings/main.js
++++ b/defaults/frame/settings/main.js
+@@ -787,7 +787,7 @@ export default class Settings extends View {
+     const primary = (id, label, f) =>
+       div().id(id).px(12).py(5).rounded(7).cursor_pointer().bg(t.accent).text_color(t.accent_foreground).text_size(13).font_semibold().hover((s) => s.opacity(0.9)).on_click(f).child(label);
+     const app = !u.app.updates
+-      ? ["A build from source: it updates with git, not here.", null]
++      ? ["Installed via a conda package manager: update it there.", null]
+       : u.app.ready
+         ? [`${u.app.ready} is ready. Restart to switch now; it also switches when you quit.`, primary("st-app-update", "Restart to update", () => run("app.update"))]
+         : [result, check("st-check-app")];
+@@ -802,7 +802,7 @@ export default class Settings extends View {
+             ? [`${c.ready} is ready. Your terminals keep running through it.`, primary("st-core-update", "Update herdr-core", () => run("app.update_core"))]
+             : u.checks
+               ? [result, check("st-check-core")]
+-              : ["Not checked: a build from source looks for no updates.", null];
++              : ["Installed via a conda package manager: update it there.", null];
+     return v_flex()
+       .w_full()
+       .child(this.heading(t, "Herdr"))
+-- 
+2.39.1.windows.1
+
