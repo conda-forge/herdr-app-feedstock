@@ -14,6 +14,8 @@ source:
       - patches/0001-ghostty-sys-link-a-system-libghostty-vt.patch
       # find the herdr-core installed into the same prefix when opened from a menu shortcut
       - patches/0002-core_bin-look-for-herdr-core-beside-the-app.patch
+      # the settings' Updates tab: a conda package manager install (update it there), not a build from source
+      - patches/0003-updates-tab-say-conda-package-manager-not-build-from-source.patch
   # src/vt.rs include_str!s the Kitty placeholder diacritics table from the
   # vendor/ghostty submodule (absent from the tarball); take it from the Ghostty
   # release conda-forge's libghostty-vt is built from
@@ -23,7 +25,7 @@ source:
     target_directory: vendor/ghostty/src/terminal/kitty
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
